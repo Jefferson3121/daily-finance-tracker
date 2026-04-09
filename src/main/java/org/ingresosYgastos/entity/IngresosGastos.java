@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -37,6 +38,13 @@ public class IngresosGastos {
         this.detalleGasto = registroBuilder.detalleGasto;
         this.fechaRegistro = registroBuilder.fechaRegistro;
 
+    }
+
+    public void sumarIngreso(BigDecimal monto) {
+        if (monto == null || monto.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("El monto del gasto debe ser mayor a cero");
+        }
+        this.gasto = this.gasto.add(monto);
     }
 
     public void sumarGasto(BigDecimal monto) {
@@ -93,4 +101,6 @@ public class IngresosGastos {
         }
 
     }
+
+
 }

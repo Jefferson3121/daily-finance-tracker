@@ -2,7 +2,6 @@ package org.ingresosYgastos.services;
 
 
 import lombok.RequiredArgsConstructor;
-import org.ingresosYgastos.IngresosGastosRepository;
 import org.ingresosYgastos.dto.RegistrarRequestDTO;
 import org.ingresosYgastos.entity.IngresosGastos;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class IngresosGastosService {
 
-    private final IngresosGastosRepository ingresosGastosRepository;
+    private final IngresosGastos.IngresosGastosRepository ingresosGastosRepository;
 
     @Transactional
     public void registrar(RegistrarRequestDTO request){
