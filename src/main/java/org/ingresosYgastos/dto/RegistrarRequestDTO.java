@@ -1,6 +1,7 @@
 package org.ingresosYgastos.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public record RegistrarRequestDTO(
@@ -8,11 +9,11 @@ public record RegistrarRequestDTO(
         BigDecimal gasto,
         String detalleIngreso,
         String detalleGasto,
-        LocalDateTime fechaRegistro
+        LocalDate fechaRegistro
 ) {
 
     public RegistrarRequestDTO {
-        fechaRegistro = LocalDateTime.now();
+        fechaRegistro = LocalDate.now();
     }
 
 
