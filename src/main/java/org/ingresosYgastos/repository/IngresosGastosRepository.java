@@ -1,15 +1,20 @@
 package org.ingresosYgastos.repository;
 
 
-import org.ingresosYgastos.entity.IngresosGastos;
+import org.ingresosYgastos.entity.Movimientos;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
+public  interface IngresosGastosRepository extends JpaRepository<Movimientos, Long> {
 
-public  interface IngresosGastosRepository extends JpaRepository<IngresosGastos, Long> {
+    Movimientos findByFechaRegistro(LocalDate fechaRegistro);
 
-    IngresosGastos findByFechaRegistro(LocalDate fechaRegistro);
+    List<Movimientos> findByFechaRegistroBetween(LocalDateTime inicio, LocalDateTime fin);
+
+
 }
