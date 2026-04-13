@@ -1,20 +1,16 @@
 package org.ingresosYgastos.dto;
 
+import jakarta.validation.constraints.NotNull;
+import org.ingresosYgastos.entity.TipoMovimiento;
+
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 public record RegistrarRequestDTO(
-        BigDecimal ingreso,
-        BigDecimal gasto,
-        String detalleIngreso,
-        String detalleGasto,
-        LocalDate fechaRegistro
-) {
 
-    public RegistrarRequestDTO {
-        fechaRegistro = LocalDate.now();
-    }
-
-
-}
+        @NotNull(message = "Monto no puede ser nulo")
+        BigDecimal monto,
+        @NotNull(message = "Tipo de movimiento no puede estar vacio")
+        TipoMovimiento tipoMovimiento,
+        String detalle
+) { }
