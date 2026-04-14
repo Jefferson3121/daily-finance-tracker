@@ -67,20 +67,7 @@ public class MovimientosService {
         return new ResumenResponseDTO(fechaInicio, totalIngresos, totalGastos, totalIngresos.subtract(totalGastos));
 
     }
-
-
-
-//    public void editar(Long id, EditarMovimientoRequestDTO request) {
-//
-//        Movimientos movimiento = movimientosRepository.findById(id)
-//                .orElseThrow(() -> new IllegalArgumentException("No existe un movimiento con id: " + id));
-//
-//        if (request.monto() != null)   movimiento.setMonto(request.monto());
-//        if (request.tipo() != null)    movimiento.setTipoMovimiento(request.tipo());
-//        if (request.detalle() != null) movimiento.setDetalle(request.detalle());
-//
-//        movimientosRepository.save(movimiento);
-//    }
+    
 
     public void eliminar(Long id) {
 
