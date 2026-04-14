@@ -38,11 +38,6 @@ public class MovimientosController {
     }
 
 
-//    @PutMapping("/{id}")
-//    public void editar(@PathVariable Long id, @RequestBody EditarMovimientoRequestDTO request) {
-//        movimientosService.editar(id, request);
-//    }
-
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         movimientosService.eliminar(id);
