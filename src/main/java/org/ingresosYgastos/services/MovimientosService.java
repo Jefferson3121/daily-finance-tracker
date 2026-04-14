@@ -3,6 +3,7 @@ package org.ingresosYgastos.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.ingresosYgastos.dto.MovimientoResponseDTO;
 import org.ingresosYgastos.dto.RegistrarRequestDTO;
 import org.ingresosYgastos.dto.ResumenResponseDTO;
 import org.ingresosYgastos.entity.Movimientos;
@@ -69,16 +70,11 @@ public class MovimientosService {
 
 
     public void eliminarMovimiento(Long id) {
-
-        if (!movimientosRepository.existsById(id)) {
-            throw new IllegalArgumentException("No existe un movimiento con id: " + id);
-        }
-
         movimientosRepository.deleteById(id);
     }
 
 
-    public List<Movimientos> listarMovimientos(LocalDate fechaInicio, LocalDate fechaFin) {
+    public List<MovimientoResponseDTO> listarMovimientos(LocalDate fechaInicio, LocalDate fechaFin) {
 
         LocalDateTime inicio = fechaInicio.atStartOfDay();
         LocalDateTime fin    = fechaFin.atTime(23, 59, 59);
@@ -89,6 +85,16 @@ public class MovimientosService {
             throw new IllegalArgumentException("No hay movimientos en ese rango de fechas");
         }
 
-        return movimientos;
+
+        List<MovimientoResponseDTO> movi = movimientos.stream()
+                .map(k -> toResponse(k) )
+                .toList();
+
+        return movi;
+    }
+
+
+    private MovimientoResponseDTO toResponse(Movimientos movimientos){
+        return new MovimientoResponseDTO(movimientos.getId(),movimientos.getMonto(), movimientos.getTipoMovimiento(), movimientos.getDetalle(), movimientos.getFechaRegistro());
     }
 }
