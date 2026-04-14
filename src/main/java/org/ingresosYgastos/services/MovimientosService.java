@@ -3,11 +3,12 @@ package org.ingresosYgastos.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.ingresosYgastos.dto.EditarMovimientoRequestDTO;
 import org.ingresosYgastos.dto.RegistrarRequestDTO;
 import org.ingresosYgastos.dto.ResumenResponseDTO;
 import org.ingresosYgastos.entity.Movimientos;
 import org.ingresosYgastos.entity.TipoMovimiento;
-import org.ingresosYgastos.repository.IngresosGastosRepository;
+import org.ingresosYgastos.repository.MovimientosRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,9 +21,9 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class IngresosGastosService {
+public class MovimientosService {
 
-    private final IngresosGastosRepository ingresosGastosRepository;
+    private final MovimientosRepository movimientosRepository;
 
     @Transactional
     public void registrar(RegistrarRequestDTO request){
@@ -36,7 +37,7 @@ public class IngresosGastosService {
                 .detalle(request.detalle())
                 .registroBuild();
 
-        ingresosGastosRepository.save(movimientos);
+        movimientosRepository.save(movimientos);
 
     }
 
@@ -47,7 +48,7 @@ public class IngresosGastosService {
         LocalDateTime fin = fechaFin.atTime(23, 59, 59);
 
 
-        List<Movimientos> movimientos = ingresosGastosRepository.findByFechaRegistroBetween(inicio, fin);
+        List<Movimientos> movimientos = movimientosRepository.findByFechaRegistroBetween(inicio, fin);
 
         if (movimientos.isEmpty()) {
             throw new IllegalArgumentException("No hay movimientos en ese rango de fechas");
@@ -65,5 +66,28 @@ public class IngresosGastosService {
 
         return new ResumenResponseDTO(fechaInicio, totalIngresos, totalGastos, totalIngresos.subtract(totalGastos));
 
+    }
+
+
+
+//    public void editar(Long id, EditarMovimientoRequestDTO request) {
+//
+//        Movimientos movimiento = movimientosRepository.findById(id)
+//                .orElseThrow(() -> new IllegalArgumentException("No existe un movimiento con id: " + id));
+//
+//        if (request.monto() != null)   movimiento.setMonto(request.monto());
+//        if (request.tipo() != null)    movimiento.setTipoMovimiento(request.tipo());
+//        if (request.detalle() != null) movimiento.setDetalle(request.detalle());
+//
+//        movimientosRepository.save(movimiento);
+//    }
+
+    public void eliminar(Long id) {
+
+        if (!movimientosRepository.existsById(id)) {
+            throw new IllegalArgumentException("No existe un movimiento con id: " + id);
+        }
+
+        movimientosRepository.deleteById(id);
     }
 }
