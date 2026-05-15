@@ -394,15 +394,4 @@ Las contribuciones son bienvenidas. Para cambios importantes:
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abre un Pull Request
 
----
-
-## 📞 Contacto
-
-**Jefferson3121**
-
-- GitHub: [@Jefferson3121](https://github.com/Jefferson3121)
-- Repositorio: [daily-finance-tracker](https://github.com/Jefferson3121/daily-finance-tracker)
-
----
-
 **Construido con ❤️ como ejercicio de aprendizaje**
